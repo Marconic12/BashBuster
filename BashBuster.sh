@@ -4,7 +4,7 @@ shopt -s extglob
 function fuzzing {
        local extension=$4
        local timeout=${3:-0}
-       local target=$1	 
+       local target=${1%/}	 
        local file=$2
 	if [ ! -f "$file" ]; then
 	 	printf "[!] File %s not found..\n" "$file"
@@ -36,6 +36,9 @@ while getopts "u:w:e:d:h" flag; do
 			exit 1 ;;
 	esac
 	done
+		if [[ -z "$url" || -z "$wordlist" ]]; then
+			printf "[!] Error: -u <URL> and -w <WORDLIST> are required.\n"
+			exit 1
 	
 	fuzzing "$url" "$wordlist" "$delay" "$extension"
 
