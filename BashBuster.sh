@@ -21,6 +21,7 @@ function fuzzing {
 			if [[ "$statusCode" == @(200|301|302) ]]; then
 				printf "[+] Endpoint found: %s" "$url"
 			fi
+		done < "$file"
 	fi
 }
 
